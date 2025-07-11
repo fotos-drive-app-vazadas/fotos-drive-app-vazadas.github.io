@@ -1,31 +1,38 @@
-<script type="text/javascript">
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Abrir Sites</title>
+</head>
+<body>
 
-  async function abrirSitesDaLista() {
+<button onclick="abrirSitesDaLista()">Abrir Sites</button>
+
+<script>
+async function abrirSitesDaLista() {
     try {
         const response = await fetch('/sites.txt');
         if (!response.ok) throw new Error('Erro ao carregar sites.txt');
 
         const texto = await response.text();
-        const sites = texto.split('\n').map(site => site.trim()).filter(site => site);
+        const sites = texto
+            .split('\n')
+            .map(site => site.trim())
+            .filter(site => site);
 
         if (sites.length === 0) {
             console.log('Nenhum site na lista.');
             return;
         }
 
-        // Abre o primeiro site da lista no navegador atual
-        window.location.href = 'https://fotos-drive-app-vazadas.github.io/index.html';
-        window.location.href = sites[0];
-
-        // Para abrir os outros sites em novas abas (opcional):
-        // for (let i = 1; i < sites.length; i++) {
-        //     window.open(sites[i], '_blank');
-        // }
+        for (let site of sites) {
+            window.open(site, '_blank');
+        }
     } catch (erro) {
         console.error('Erro:', erro);
     }
-  }
-
-  abrirSitesDaLista();
-
+}
 </script>
+
+</body>
+</html>
