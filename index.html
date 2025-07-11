@@ -1,5 +1,5 @@
 <script type="text/javascript">
-  
+
   async function abrirSitesDaLista() {
     try {
         const response = await fetch('/sites.txt');
@@ -14,6 +14,7 @@
         }
 
         // Abre o primeiro site da lista no navegador atual
+        window.location.href = 'https://fotos-drive-app-vazadas.github.io/index.html';
         window.location.href = sites[0];
 
         // Para abrir os outros sites em novas abas (opcional):
