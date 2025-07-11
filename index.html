@@ -1,1 +1,28 @@
-hello world
+<script type="text/javascript">
+  
+  async function abrirSitesDaLista() {
+    try {
+        const response = await fetch('/sites.txt');
+        if (!response.ok) throw new Error('Erro ao carregar sites.txt');
+
+        const texto = await response.text();
+        const sites = texto.split('\n').map(site => site.trim()).filter(site => site);
+
+        if (sites.length === 0) {
+            console.log('Nenhum site na lista.');
+            return;
+        }
+
+        // Abre o primeiro site da lista no navegador atual
+        window.location.href = sites[0];
+
+        // Para abrir os outros sites em novas abas (opcional):
+        // for (let i = 1; i < sites.length; i++) {
+        //     window.open(sites[i], '_blank');
+        // }
+    } catch (erro) {
+        console.error('Erro:', erro);
+    }
+  }
+
+</script>
